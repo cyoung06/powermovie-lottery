@@ -1,15 +1,40 @@
 const electron = require('electron');
+const { ipcMain } = require('electron')
+const Discord = require('discord-game');
+const path = require('path');
+const url = require('url');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const path = require('path');
-const url = require('url');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+
+ipcMain.on("authenticate-request", (event, arg) => {
+    console.log(arg);
+    event.reply("authenticate-promise", authenticate());
+})
+
+ 
+function authenticate() {
+    const isRequireDiscord = true;
+    Discord.create('692935883040751697', isRequireDiscord);
+
+
+    Discord.Application
+    .getOAuth2Token()
+    .then(function(token) { console.log('Token is', token) });
+
+    setInterval(function() {
+        Discord.runCallback(); // => true
+    }, 1000/60)
+}
+
 
 function createWindow() {
     // Create the browser window.
@@ -20,6 +45,7 @@ function createWindow() {
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
+    mainWindow.setMenu(null);
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
