@@ -16,7 +16,7 @@ class PreRPCAuthorize extends Component {
             fetch('https://discordapp.com/api/users/@me', {method: "GET", headers: {
                 Authorization: "Bearer "+arg
             }}).then(res => res.json()).then(json => {
-                this.props.setUser(json);
+                this.props.setUser(arg, json);
             }).catch(err => {
                 this.setState({error: err.toString(), auth: false});
             })
