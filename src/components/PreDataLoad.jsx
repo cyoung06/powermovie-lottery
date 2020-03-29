@@ -34,7 +34,6 @@ class PreDataLoad extends Component {
     
     render() {
         const user = this.props.user;
-        console.log(this.state.data);
         return (
             <Transition in={this.state.showing} timeout={500}>
                 {state => (

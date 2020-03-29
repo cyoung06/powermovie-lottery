@@ -2,6 +2,8 @@ const electron = require('electron');
 const { ipcMain } = require('electron')
 const { authenticate } = require('./api/RPCConnection'); 
 
+const isDev = require('electron-is-dev');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -23,16 +25,16 @@ ipcMain.on("authenticate-request", (event, arg) => {
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600, webPreferences: {
+    mainWindow = new BrowserWindow({width: 800, height: 600, title: "파워무비 추첨기", webPreferences: {
         nodeIntegration: false,
         preload: __dirname + "/preload.js"
     }});
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:3000');
+    
+    mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
     mainWindow.setMenu(null);
 
     // Emitted when the window is closed.
