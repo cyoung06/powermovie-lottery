@@ -48,7 +48,6 @@ function createWindow() {
 
     // Open the DevTools.
     mainWindow.setMenu(null);
-    mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
