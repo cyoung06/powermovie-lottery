@@ -2,7 +2,8 @@
   "name": "powermovie-lottery",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron-main.js",
+  "homepage": "./",
+  "main": "public/electron-main.js",
   "dependencies": {
     "@material-ui/core": "^4.9.7",
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,12 +17,15 @@
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0"
   },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "electron-dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "electron-builder -c.extraMetadata.main=build/electron-main.js",
+    "preelectron-pack": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,7 +43,31 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^5.1.0",
+    "cross-env": "^7.0.2",
     "electron": "^8.2.0",
-    "electron-rebuild": "^1.10.1"
+    "electron-builder": "^22.4.1",
+    "electron-rebuild": "^1.10.1",
+    "wait-on": "^4.0.1"
+  },
+  "author": {
+    "name": "syeyoung",
+    "email": "cyoung06@naver.com",
+    "url": "http://sye.kro.kr/"
+  },
+  "build": {
+    "appId": "kr.syeyoung",
+    "productName": "PowerMovie Lotto",
+    "copyright": "Copyright © 2019 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }
