@@ -160,6 +160,7 @@ class RandomChooser extends Component {
                         </Button>
                     </Grid>
                 </div>
+                <p style={{textAlign: 'right'}}>Made by syeyoung (syeyoung#3876)</p> <br/>
             </div>
             <hr style={{margin: '0px'}}/>
             <div style={{paddingLeft: '2em', paddingRight: '2em'}}>
