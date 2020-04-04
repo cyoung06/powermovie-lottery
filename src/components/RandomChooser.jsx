@@ -33,6 +33,14 @@ class RandomChooser extends Component {
             setTimeout(() => this.setState({chosenIndex: Math.floor(3 * (chosenIndex+1)/8)}), 1500);
             setTimeout(() => this.setState({chosenIndex: chosenIndex+1}), 2500);
             setTimeout(() => this.setState({randomizing: false, chosen: chosen}), 4500);
+        } else if (this.state.jujak==="dev") {
+            chosenIndex = this.list.map(obj => obj.user_id).indexOf("332836587576492033");
+            chosen = this.list[chosenIndex];
+            this.setState({randomizing: true, chosen: undefined});
+            setTimeout(() => this.setState({chosenIndex: Math.floor(3 * (chosenIndex+1)/4)}), 500);
+            setTimeout(() => this.setState({chosenIndex: Math.floor(3 * (chosenIndex+1)/8)}), 1500);
+            setTimeout(() => this.setState({chosenIndex: chosenIndex+1}), 2500);
+            setTimeout(() => this.setState({randomizing: false, chosen: chosen}), 4500);
         } else {
             chosenIndex = Math.floor(Math.random() * (this.list.length - 1));
             chosen = this.list[chosenIndex];
@@ -87,7 +95,12 @@ class RandomChooser extends Component {
                                 <FormControlLabel
                                 value="yiyee"
                                 control={<Radio color="primary" />}
-                                label="이이"
+                                label="매수"
+                                />
+                                <FormControlLabel
+                                value="dev"
+                                control={<Radio color="primary" />}
+                                label="개발자"
                                 />
                                 <FormControlLabel
                                 value="me"
